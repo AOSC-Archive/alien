@@ -395,7 +395,7 @@ sub prep {
 	open (OUT, ">$dir/autobuild/build") || die "$dir/autobuild/build: $!";
 #	my $fixpermscomment = $this->fixperms ? "" : "#";
 	print OUT "mkdir -p abdist\n";
-	print OUT "find . -maxdepth 1 -mindepth 1 -not -name debian -not -name abdist -print0 | xargs -0 -r -i cp -a {} abdist/ \n";
+	print OUT "find . -maxdepth 1 -mindepth 1 -not -name autobuild -not -name abdist -print0 | xargs -0 -r -i cp -a {} abdist/ \n";
 #	print OUT "cp -r * abdist"
 #	print OUT
 	close OUT;
@@ -713,7 +713,7 @@ sub savescript {
 		die "$dir/autobuild/override/DEBIAN/$script: $!";
 	print OUT $data;
 	close OUT;
-#	shift->do("chmod 755 $dir/autobuild/override/DEBIAN/$script");
+	$this->do("chmod 755 $dir/autobuild/override/DEBIAN/$script");
 }
 
 =item gen_postinst
